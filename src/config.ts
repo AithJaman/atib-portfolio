@@ -3,7 +3,7 @@ export type Language = 'en' | 'zh';
 export const personalInfo = {
   fullName: 'MD Monjur A Alahi Atib',
   shortName: 'Atib',
-  chineseName: '艾缇',
+  chineseName: '艾缇 希拉',
   emails: ['aitbzaman@gmail.com', 'jamanatib@qq.com', 'ls2303201@buaa.edu.cn'],
   primaryEmail: 'aitbzaman@gmail.com',
   phone: '+8613264910246',

@@ -89,7 +89,7 @@ export function Hero() {
         <div className={`flex flex-col items-center text-center transition-all duration-[1200ms] pb-4 md:pb-8 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '500ms' }}>
           {/* Profile Photo with blue glow */}
           <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-blue-400/50 overflow-hidden mb-4 bg-white/5 backdrop-blur-sm shadow-[0_0_30px_rgba(37,99,235,0.3)]">
-            <img src="/images/atib-portrait.jpg" alt="Atib" className="w-full h-full object-cover" loading="eager" />
+            <img src="/atib-portfolio/images/atib-portrait.jpg" alt="Atib" className="w-full h-full object-cover" loading="eager" />
           </div>
           <p className="text-sm text-blue-200/50 mb-1">{personalInfo.fullName}</p>
           <p className="text-sm md:text-base text-blue-100/80 mb-2 max-w-xl">{heroConfig.tagline[language]}</p>

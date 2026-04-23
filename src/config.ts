@@ -72,7 +72,7 @@ export const heroConfig = {
 };
 
 export const aboutConfig = {
-  label: { en: 'About hira', zh: '关于' },
+  label: { en: 'About', zh: '关于' },
   description: { en: "Master's student in Control Engineering at Beihang University (BUAA), CSC Scholarship recipient. Published researcher in robust nonlinear control, airship dynamics, PLC automation and AI applications. Experienced in MATLAB/Simulink, SolidWorks (CSWP), Siemens PLC programming, and industrial control systems. Holder of Six Sigma Green Belt certification with 5 languages proficiency (Bengali, English, Chinese, Hindi, Urdu).", zh: '北京航空航天大学控制工程硕士，中国政府奖学金获得者。在鲁棒非线性控制、飞艇动力学、PLC自动化及AI应用领域有深入研究。精通MATLAB/Simulink、SolidWorks (CSWP)、西门子PLC编程和工业控制系统。持有六西格玛绿带认证，熟练掌握5种语言（孟加拉语、英语、中文、印地语、乌尔都语）。' },
   experienceValue: '6+',
   experienceLabel: { en: 'Years of\nResearch &\nEngineering', zh: '年研究\n与工程\n经验' },

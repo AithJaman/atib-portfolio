@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
+import { heroConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { personalInfo } from '@/config';
-import { MapPin, Mail, Github, Linkedin, GraduationCap, ExternalLink } from 'lucide-react';
+import { MapPin, Mail, GraduationCap, Github, Linkedin } from 'lucide-react';
+import { Link } from 'react-router';
 
 export function Hero() {
   const { language } = useLanguage();
@@ -13,7 +14,9 @@ export function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
-  const name = language === 'zh' ? personalInfo.nameCn : personalInfo.nameEn;
+  const name = heroConfig.name[language];
+  const roles = heroConfig.roles[language];
+  const tagline = heroConfig.tagline[language];
 
   return (
     <section
@@ -37,33 +40,18 @@ export function Hero() {
               {name}
             </h1>
             
-            {/* Title */}
+            {/* Role */}
             <p className="text-lg md:text-xl text-blue-200/80 mb-2">
-              {language === 'zh' ? '自动化与控制工程师' : 'Automation & Control Engineer'}
+              {roles[0] || ''}
             </p>
             <p className="text-sm text-blue-200/50 mb-8">
-              {language === 'zh' ? '研究员 / 硕士研究生' : 'Researcher / Master Candidate'}
+              {tagline}
             </p>
-            
-            {/* Location & Email */}
-            <div className="flex flex-wrap items-center gap-4 text-blue-200/50 text-sm mb-8">
-              <span className="flex items-center gap-1.5">
-                <MapPin className="w-4 h-4" /> 
-                {personalInfo.location}
-              </span>
-              <a 
-                href={`mailto:${personalInfo.primaryEmail}`} 
-                className="flex items-center gap-1.5 hover:text-blue-300 transition-colors"
-              >
-                <Mail className="w-4 h-4" /> 
-                {personalInfo.primaryEmail}
-              </a>
-            </div>
             
             {/* Social Icons */}
             <div className="flex items-center gap-4">
               <a 
-                href={personalInfo.researchGate} 
+                href="https://www.researchgate.net/profile/Md-Atib" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-500/30 transition-all"
@@ -85,6 +73,23 @@ export function Hero() {
                 <Linkedin className="w-5 h-5 text-white/80" />
               </a>
             </div>
+            
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-4 mt-8">
+              <Link
+                to="/cv"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-full text-sm text-white font-medium transition-all"
+              >
+                {language === 'zh' ? '下载简历' : 'Download CV'}
+              </Link>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-blue-400/30 hover:border-blue-400/60 rounded-full text-sm text-blue-200 transition-all"
+              >
+                <Mail className="w-4 h-4" />
+                {language === 'zh' ? '联系我' : 'Contact Me'}
+              </a>
+            </div>
           </div>
           
           {/* RIGHT SIDE - Portrait Photo */}
@@ -96,12 +101,9 @@ export function Hero() {
               {/* Photo container */}
               <div className="relative w-64 h-80 md:w-80 md:h-[420px] rounded-2xl overflow-hidden border border-blue-400/20 shadow-[0_0_40px_rgba(37,99,235,0.2)]">
                 <img 
-                  src="/atib-portfolio/images/atib-portrait.jpg" 
+                  src={heroConfig.backgroundImage} 
                   alt={name}
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
                 />
               </div>
             </div>

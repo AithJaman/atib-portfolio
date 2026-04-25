@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { heroConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Mail, GraduationCap, Github, Linkedin } from 'lucide-react';
@@ -19,24 +19,24 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative w-full min-h-[90vh] lg:min-h-screen overflow-hidden bg-[#e8e8e8]">
-      
-      {/* RIGHT SIDE — Dark area with diagonal cut (behind everything) */}
-      <div 
+
+      {/* RIGHT SIDE — Dark area with diagonal cut */}
+      <div
         className="absolute top-0 right-0 h-full bg-[#0a1628]"
-        style={{ 
+        style={{
           width: '52%',
           clipPath: 'polygon(20% 0, 100% 0, 100% 100%, 0% 100%)'
         }}
       />
 
-      {/* PORTRAIT IMAGE — Body crop style */}
+      {/* PORTRAIT IMAGE — Body crop style, transparent PNG */}
       <div className="absolute top-0 right-0 h-full hidden lg:flex items-end justify-center"
         style={{ width: '52%' }}>
-        <img 
-          src="/atib-portfolio/images/atib-portrait.jpg" 
+        <img
+          src="/atib-portfolio/images/atib-portrait.png"
           alt={name}
           className="h-[88%] w-auto max-w-full object-cover"
-          style={{ 
+          style={{
             objectPosition: 'center 15%',
             maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
@@ -47,22 +47,22 @@ export function Hero() {
       {/* CONTENT — Left side */}
       <div className="relative z-10 container-large px-6 lg:px-16 h-full min-h-[90vh] lg:min-h-screen flex items-center">
         <div className={`max-w-xl transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          
+
           <p className="text-gray-500 text-sm font-geist-mono uppercase tracking-[0.25em] mb-4">
             {language === 'zh' ? '你好，我是' : 'Hi, I am'}
           </p>
-          
+
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#0a1628] mb-3 leading-[0.95]">
             {name}
           </h1>
-          
+
           <p className="text-xl md:text-2xl text-gray-700 mb-1 font-medium">
             {roles[0] || ''}
           </p>
           <p className="text-sm text-gray-400 mb-10">
             {tagline}
           </p>
-          
+
           {/* Social Icons */}
           <div className="flex items-center gap-3 mb-10">
             <a href="https://www.researchgate.net/profile/Md-Atib" target="_blank" rel="noopener noreferrer"
@@ -77,7 +77,7 @@ export function Hero() {
               <Linkedin className="w-5 h-5 text-white" />
             </a>
           </div>
-          
+
           {/* Buttons */}
           <div className="flex flex-wrap items-center gap-4">
             <Link to="/cv"
@@ -97,8 +97,8 @@ export function Hero() {
       <div className={`lg:hidden absolute bottom-0 right-0 w-full flex justify-center transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="relative w-72 h-80 mt-8">
           <div className="absolute inset-0 bg-gradient-to-t from-[#e8e8e8] via-transparent to-transparent z-10" />
-          <img 
-            src="/atib-portfolio/images/atib-portrait.jpg" 
+          <img
+            src="/atib-portfolio/images/atib-portrait.png"
             alt={name}
             className="w-full h-full object-cover object-top rounded-t-2xl"
           />

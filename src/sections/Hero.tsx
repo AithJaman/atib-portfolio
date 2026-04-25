@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { heroConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { MapPin, Mail, GraduationCap, Github, Linkedin } from 'lucide-react';
+import { Mail, GraduationCap, Github, Linkedin } from 'lucide-react';
 import { Link } from 'react-router';
 
 export function Hero() {

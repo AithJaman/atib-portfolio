@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { heroConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Phone, Download, GraduationCap, Github, Linkedin } from 'lucide-react';
+import { Link } from 'react-router';
 
 export function Hero() {
   const { language } = useLanguage();
@@ -91,11 +92,11 @@ export function Hero() {
               <Phone className="w-4 h-4" />
               {language === 'zh' ? '立即致电' : 'Call Now'}
             </a>
-            <a href="/cv-atib.pdf"
+            <Link to="/cv"
               className="inline-flex items-center gap-2 px-8 py-4 border-2 border-[#0a1628] text-[#0a1628] hover:bg-[#0a1628] hover:text-white rounded-full text-sm font-medium transition-all">
               <Download className="w-4 h-4" />
               {language === 'zh' ? '下载简历' : 'Download CV'}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

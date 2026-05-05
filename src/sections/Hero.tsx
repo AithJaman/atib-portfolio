@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { heroConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Phone, GraduationCap, Github, Linkedin } from 'lucide-react';
-import { Link } from 'react-router';
 
 export function Hero() {
   const { language } = useLanguage();

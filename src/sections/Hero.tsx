@@ -33,7 +33,7 @@ export function Hero() {
       <div className="absolute top-0 right-0 h-full hidden lg:flex items-end justify-center"
         style={{ width: '52%' }}>
         <img
-          src="/atib-portfolio/images/atib-portrait.png"
+          src="/atib-portfolio/images/atib-portrait.png?v=2"
           alt={name}
           className="h-[90%] w-auto max-w-full object-cover"
           style={{
@@ -106,7 +106,7 @@ export function Hero() {
         <div className="relative w-64 h-72 mt-8">
           <div className="absolute inset-0 bg-gradient-to-t from-[#e8e8e8] via-transparent to-transparent z-10" />
           <img
-            src="/atib-portfolio/images/atib-portrait.png"
+            src="/atib-portfolio/images/atib-portrait.png?v=2"
             alt={name}
             className="w-full h-full object-cover object-top"
             onError={(e) => {

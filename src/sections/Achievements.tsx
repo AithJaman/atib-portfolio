@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
-import { achievementsConfig, type Achievement } from '@/config';
+import { achievementsConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Award, X } from 'lucide-react';
 import { useState } from 'react';
@@ -9,7 +9,7 @@ export function Achievements() {
   const { language } = useLanguage();
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation({ threshold: 0.3 });
   const { containerRef: gridRef, visibleItems } = useStaggerAnimation(achievementsConfig.items.length, 120);
-  const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
+  const [selectedAchievement, setSelectedAchievement] = useState<any>(null);
 
   const label = achievementsConfig.label[language];
   const heading = achievementsConfig.heading[language];

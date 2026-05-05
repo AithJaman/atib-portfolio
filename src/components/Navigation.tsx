@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { navigationConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Globe, Menu, X, FileText, Sun, Moon } from 'lucide-react';
+import { Globe, Menu, X, Phone, Sun, Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export function Navigation() {
@@ -69,9 +69,9 @@ export function Navigation() {
               </a>
             ))}
 
-            {/* Contact Button */}
+                        {/* Contact Button */}
             <a
-              href={navigationConfig.contactHref}
+              href="tel:+8613264910246"
               className={cn(
                 'flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300',
                 isScrolled
@@ -79,7 +79,7 @@ export function Navigation() {
                   : 'bg-[#0a1628] text-white hover:bg-[#0a1628]/90'
               )}
             >
-              <FileText className="w-3.5 h-3.5" />
+              <Phone className="w-3.5 h-3.5" />
               {contactLabel}
             </a>
 

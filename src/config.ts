@@ -82,11 +82,11 @@ export const aboutConfig = {
     { value: '5', label: { en: 'Core\nSkill Areas', zh: '核心\n技能领域' } },
     { value: '5', label: { en: 'Languages\nFluent', zh: '流利\n语言' } },
   ],
-  images: [
-    { src: '/atib-portfolio/images/about-1.jpg', alt: { en: 'PLC Programming', zh: 'PLC编程' } },
-    { src: '/atib-portfolio/images/about-2.jpg', alt: { en: 'CAD Design', zh: 'CAD设计' } },
-    { src: '/atib-portfolio/images/about-3.jpg', alt: { en: 'Airship Research', zh: '飞艇研究' } },
-    { src: '/atib-portfolio/images/about-4.jpg', alt: { en: 'Conference Presentation', zh: '学术会议' } },
+    images: [
+    { src: '/atib-portfolio/images/about-1.jpg', alt: { en: 'Professional Photo', zh: '职业照片' } },
+    { src: '/atib-portfolio/images/about-2.png?v=2', alt: { en: 'Research Work', zh: '研究工作' } },
+    { src: '/atib-portfolio/images/about-3.png?v=2', alt: { en: 'Lab & Projects', zh: '实验室与项目' } },
+    { src: '/atib-portfolio/images/about-4.jpg', alt: { en: 'Academic Life', zh: '学术生活' } },
   ],
 };
 

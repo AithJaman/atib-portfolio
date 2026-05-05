@@ -84,14 +84,16 @@ export function Hero() {
             </a>
           </div>
 
-                      {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4">
-              <a href="tel:+8613264910246"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-full text-sm text-white font-medium transition-all">
-                <Phone className="w-4 h-4" />
-                {language === 'zh' ? '立即致电' : 'Call Now'}
-              </a>
-            </div>
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap items-center gap-4">
+            <a href="tel:+8613264910246"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-full text-sm text-white font-medium transition-all">
+              <Phone className="w-4 h-4" />
+              {language === 'zh' ? '立即致电' : 'Call Now'}
+            </a>
+          </div>
+        </div>
+      </div>
 
       {/* Mobile image */}
       <div className={`lg:hidden absolute bottom-0 right-0 w-full flex justify-center transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>

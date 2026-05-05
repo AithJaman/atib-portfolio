@@ -3,7 +3,6 @@ import { navigationConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Globe, Menu, X, FileText, Sun, Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router';
 
 export function Navigation() {
   const { language, setLanguage } = useLanguage();
@@ -11,14 +10,12 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
-  // Detect scroll position to switch navbar style
   useEffect(() => {
     const handleScroll = () => {
-      // After scrolling 100px, switch to dark mode navbar
       setIsScrolled(window.scrollY > 100);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Check initial position
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

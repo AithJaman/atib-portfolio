@@ -44,7 +44,7 @@ export function ContactSidebar() {
             <h3 className="text-lg font-bold text-exvia-black mb-1">{language === 'zh' ? '添加微信好友' : 'Add on WeChat'}</h3>
             <p className="text-sm text-exvia-black/50 mb-4">{personalInfo.wechat}</p>
             <div className="w-48 h-48 mx-auto rounded-2xl overflow-hidden border-2 border-blue-100 bg-gray-50 flex items-center justify-center">
-              <img src="/images/wechat-qr.png" alt="WeChat QR" className="w-full h-full object-contain p-2" />
+              <img src="/atib-portfolio/images/wechat-qr.png" alt="WeChat QR" className="w-full h-full object-contain p-2" />
             </div>
             <p className="text-xs text-exvia-black/40 mt-4">{language === 'zh' ? '扫描二维码添加好友' : 'Scan QR code to add friend'}</p>
           </div>

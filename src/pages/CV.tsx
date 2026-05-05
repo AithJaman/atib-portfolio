@@ -16,7 +16,6 @@ import {
   FileText,
   Briefcase,
   Code2,
-  FlaskConical,
   Globe,
   Star,
 } from 'lucide-react';
@@ -275,7 +274,7 @@ export default function CV() {
             <div className="flex flex-col lg:flex-row gap-8 items-start">
               <div className="w-28 h-28 lg:w-32 lg:h-32 rounded-2xl overflow-hidden border-3 border-blue-400/50 shadow-[0_0_30px_rgba(37,99,235,0.3)] flex-shrink-0">
                 <img
-                  src="/images/about-1.jpg"
+                  src="/atib-portfolio/images/atib-portrait.png"
                   alt="Atib"
                   className="w-full h-full object-cover"
                 />
@@ -401,7 +400,7 @@ export default function CV() {
             </Section>
 
             {/* Publications */}
-            <Section icon={<FlaskConical className="w-5 h-5" />} title={t.publications}>
+            <Section icon={<BookOpen className="w-5 h-5" />} title={t.publications}>
               <div className="space-y-4">
                 {papers.map((paper, i) => (
                   <div key={i} className="bg-gray-50 rounded-xl p-4">

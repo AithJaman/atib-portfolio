@@ -43,7 +43,6 @@ export function Navigation() {
     >
       <div className="container-large px-6 lg:px-12">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
           <a
             href="#hero"
             className={cn(
@@ -54,7 +53,6 @@ export function Navigation() {
             {logo}
           </a>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {links.map((link, index) => (
               <a
@@ -69,7 +67,6 @@ export function Navigation() {
               </a>
             ))}
 
-                        {/* Contact Button */}
             <a
               href="tel:+8613264910246"
               className={cn(
@@ -83,7 +80,6 @@ export function Navigation() {
               {contactLabel}
             </a>
 
-            {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
               className={cn(
@@ -97,7 +93,6 @@ export function Navigation() {
               {language === 'en' ? '中文' : 'EN'}
             </button>
 
-            {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
               className={cn(
@@ -111,7 +106,6 @@ export function Navigation() {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={cn(
@@ -126,7 +120,6 @@ export function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className={cn('lg:hidden absolute top-full left-0 right-0 border-t shadow-xl transition-colors duration-300', isScrolled ? 'bg-[#0a1628]/95 border-white/10' : 'bg-white/95 border-[#0a1628]/10')}>
           <div className="container-large px-6 py-6 flex flex-col gap-4">
@@ -144,7 +137,7 @@ export function Navigation() {
               </a>
             ))}
             <a
-              href={navigationConfig.contactHref}
+              href="tel:+8613264910246"
               className={cn(
                 'flex items-center justify-center gap-2 px-4 py-3 rounded-full text-sm font-medium mt-2',
                 isScrolled
@@ -152,7 +145,7 @@ export function Navigation() {
                   : 'bg-[#0a1628] text-white'
               )}
             >
-              <FileText className="w-4 h-4" />
+              <Phone className="w-4 h-4" />
               {contactLabel}
             </a>
           </div>

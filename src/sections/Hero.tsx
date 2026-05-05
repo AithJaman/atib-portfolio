@@ -30,7 +30,7 @@ export function Hero() {
       />
 
       {/* PORTRAIT IMAGE */}
-      <div className="absolute top-0 right-0 h-full hidden lg:flex items-end justify-end"
+      <div className="absolute top-0 right-0 h-full hidden lg:flex items-end justify-center"
         style={{ width: '52%' }}>
         <img
           src="/atib-portfolio/images/atib-portrait.png"
@@ -101,16 +101,18 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Mobile image */}
-      <div className={`lg:hidden absolute bottom-0 right-0 w-full flex justify-end transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="relative w-64 h-72 mt-8">
-          <div className="absolute inset-0 bg-gradient-to-t from-[#e8e8e8] via-transparent to-transparent z-10" />
+            {/* Mobile image — Small, right-aligned inside blue area */}
+      <div className={`lg:hidden absolute bottom-0 right-0 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="relative w-48 h-56 sm:w-56 sm:h-64">
+          {/* Fade gradient from bottom for smooth blend */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-transparent to-transparent z-10 pointer-events-none" />
           <img
             src="/atib-portfolio/images/atib-portrait.png"
             alt={name}
             className="w-full h-full object-cover object-top"
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = 'none';
+            style={{
+              maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)'
             }}
           />
         </div>

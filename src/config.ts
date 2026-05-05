@@ -14,7 +14,7 @@ export const personalInfo = {
   nationality: 'Bangladesh',
   dob: '2000',
   passport: 'A19237023',
-  researchGate: 'https://www.researchgate.net/profile/Monjur-A-Alahi-Atib',
+    researchGate: 'https://www.researchgate.net/profile/Monjur-A-Alahi-Atib',
   googleScholar: 'https://scholar.google.com/citations?view_op=list_works&hl=en&user=mWzQf5UAAAAJ',
   linkedIn: 'https://www.linkedin.com/in/atib-zaman',
   github: 'https://github.com/atibzaman',
@@ -28,9 +28,9 @@ export const institutions = {
 };
 
 export const socialLinks = [
-  { icon: 'Linkedin', href: 'https://www.linkedin.com/in/atib-zaman', label: 'LinkedIn' },
+    { icon: 'Linkedin', href: 'https://www.linkedin.com/in/atib-zaman', label: 'LinkedIn' },
   { icon: 'BookOpen', href: 'https://www.researchgate.net/profile/Monjur-A-Alahi-Atib', label: 'ResearchGate' },
-  { icon: 'GraduationCap', href: 'https://scholar.google.com/citations?view_op=list_works&hl=en&user=mWzQf5UAAAAJ', label: 'Google Scholar' },
+  { icon: 'GraduationCap', href: 'https://scholar.google.com/citations?user=mWzQf5UAAAAJ&hl=en', label: 'Google Scholar' },
   { icon: 'Github', href: 'https://github.com/atibzaman', label: 'GitHub' },
   { icon: 'Mail', href: 'mailto:aitbzaman@gmail.com', label: 'Email' },
 ];
@@ -388,8 +388,8 @@ export const ctaConfig = {
   tags: { en: ['Control Engineer', 'Automation Specialist', 'Researcher'], zh: ['控制工程师', '自动化专家', '研究员'] },
   heading: { en: "Let's build something\ntogether", zh: '让我们一起\n构建未来' },
   description: { en: 'Open to collaborations in control systems, automation projects, and research partnerships.', zh: '欢迎控制系统、自动化项目和研究合作方面的合作。' },
-  buttonText: { en: 'Send an Email', zh: '发送邮件' },
-  buttonHref: 'mailto:aitbzaman@gmail.com',
+  buttonText: { en: 'Call Now', zh: '立即致电' },
+  buttonHref: 'tel:+8613264910246',
   email: 'aitbzaman@gmail.com',
   email2: 'jamanatib@qq.com',
   email3: 'ls2303201@buaa.edu.cn',

@@ -66,7 +66,29 @@
     --input: 214 60% 90%;
     --ring: 217 91% 60%;
     --radius: 0.75rem;
-    
+  }
+
+  .dark {
+    --background: 0 0% 7.5%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 7.5%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 100%;
+  }
+
+  :root {
     /* Animation Easings */
     --ease-out-quad: cubic-bezier(0.250, 0.460, 0.450, 0.940);
     --ease-out-cubic: cubic-bezier(0.215, 0.610, 0.355, 1);

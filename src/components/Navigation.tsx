@@ -1,14 +1,15 @@
 import { cn } from '@/lib/utils';
 import { navigationConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Globe, Menu, X, Phone, Sun, Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export function Navigation() {
   const { language, setLanguage } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,11 +26,6 @@ export function Navigation() {
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'zh' : 'en');
-  };
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle('dark');
   };
 
   return (
@@ -53,6 +49,7 @@ export function Navigation() {
             {logo}
           </a>
 
+          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {links.map((link, index) => (
               <a
@@ -80,6 +77,7 @@ export function Navigation() {
               {contactLabel}
             </a>
 
+            {/* Language Toggle - Desktop */}
             <button
               onClick={toggleLanguage}
               className={cn(
@@ -93,6 +91,7 @@ export function Navigation() {
               {language === 'en' ? '中文' : 'EN'}
             </button>
 
+            {/* Theme Toggle - Desktop */}
             <button
               onClick={toggleTheme}
               className={cn(
@@ -101,25 +100,58 @@ export function Navigation() {
                   ? 'bg-white/10 text-white hover:bg-white/20'
                   : 'bg-[#0a1628]/10 text-[#0a1628] hover:bg-[#0a1628]/20'
               )}
+              aria-label="Toggle dark mode"
             >
-              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
           </div>
 
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={cn(
-              'lg:hidden w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300',
-              isScrolled
-                ? 'bg-white/10 text-white'
-                : 'bg-[#0a1628]/10 text-[#0a1628]'
-            )}
-          >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          {/* Mobile Right Side: Theme + Language + Menu */}
+          <div className="flex lg:hidden items-center gap-2">
+            {/* Theme Toggle - Mobile */}
+            <button
+              onClick={toggleTheme}
+              className={cn(
+                'w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300',
+                isScrolled
+                  ? 'bg-white/10 text-white hover:bg-white/20'
+                  : 'bg-[#0a1628]/10 text-[#0a1628] hover:bg-[#0a1628]/20'
+              )}
+              aria-label="Toggle dark mode"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+
+            {/* Language Toggle - Mobile */}
+            <button
+              onClick={toggleLanguage}
+              className={cn(
+                'px-2.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300',
+                isScrolled
+                  ? 'bg-white/10 text-white hover:bg-white/20'
+                  : 'bg-[#0a1628]/10 text-[#0a1628] hover:bg-[#0a1628]/20'
+              )}
+            >
+              {language === 'en' ? '中文' : 'EN'}
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={cn(
+                'lg:hidden w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300',
+                isScrolled
+                  ? 'bg-white/10 text-white'
+                  : 'bg-[#0a1628]/10 text-[#0a1628]'
+              )}
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </div>
 
+      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className={cn('lg:hidden absolute top-full left-0 right-0 border-t shadow-xl transition-colors duration-300', isScrolled ? 'bg-[#0a1628]/95 border-white/10' : 'bg-white/95 border-[#0a1628]/10')}>
           <div className="container-large px-6 py-6 flex flex-col gap-4">

@@ -18,7 +18,7 @@ export function Hero() {
   const tagline = heroConfig.tagline[language];
 
   return (
-    <section id="hero" className="relative w-full min-h-[90vh] lg:min-h-screen overflow-hidden bg-[#e8e8e8]">
+    <section id="hero" className="relative w-full min-h-[70vh] sm:min-h-[75vh] lg:min-h-screen overflow-hidden bg-[#e8e8e8]">
 
       {/* RIGHT SIDE — Dark area with diagonal cut */}
       <div
@@ -29,7 +29,7 @@ export function Hero() {
         }}
       />
 
-      {/* PORTRAIT IMAGE */}
+      {/* PORTRAIT IMAGE - Desktop */}
       <div className="absolute top-0 right-0 h-full hidden lg:flex items-end justify-center"
         style={{ width: '52%' }}>
         <img
@@ -48,7 +48,7 @@ export function Hero() {
       </div>
 
       {/* CONTENT — Left side */}
-      <div className="relative z-10 container-large px-6 lg:px-16 h-full min-h-[90vh] lg:min-h-screen flex items-center">
+      <div className="relative z-10 container-large px-6 lg:px-16 h-full min-h-[70vh] sm:min-h-[75vh] lg:min-h-screen flex items-center">
         <div className={`max-w-xl transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
 
           {/* Hi I am — Blue color */}
@@ -75,7 +75,7 @@ export function Hero() {
               className="w-11 h-11 rounded-full bg-[#0a1628] flex items-center justify-center hover:bg-blue-600 transition-all">
               <GraduationCap className="w-5 h-5 text-white" />
             </a>
-            <a href="https://github.com/AithJaman" target="_blank" rel="noopener noreferrer"
+            <a href="https://github.com/atibzaman" target="_blank" rel="noopener noreferrer"
               className="w-11 h-11 rounded-full bg-[#0a1628] flex items-center justify-center hover:bg-blue-600 transition-all">
               <Github className="w-5 h-5 text-white" />
             </a>
@@ -101,9 +101,9 @@ export function Hero() {
         </div>
       </div>
 
-            {/* Mobile image — Small, right-aligned inside blue area */}
+      {/* Mobile image — Small, right-aligned inside blue area */}
       <div className={`lg:hidden absolute bottom-0 right-0 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="relative w-48 h-56 sm:w-56 sm:h-64">
+        <div className="relative w-44 h-52 sm:w-52 sm:h-60">
           {/* Fade gradient from bottom for smooth blend */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-transparent to-transparent z-10 pointer-events-none" />
           <img

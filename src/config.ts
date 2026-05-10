@@ -83,12 +83,14 @@ export const aboutConfig = {
     { value: '5', label: { en: 'Languages\nFluent', zh: '流利\n语言' } },
   ],
         images: [
+          { src: '/atib-portfolio/images/about-2.png', alt: { en: 'Research Work', zh: '研究工作' } },
     { src: '/atib-portfolio/images/about-1.jpg', alt: { en: 'Professional Photo', zh: '职业照片' } },
-    { src: '/atib-portfolio/images/about-2.png', alt: { en: 'Research Work', zh: '研究工作' } },
+    
     { src: '/atib-portfolio/images/about-3.png', alt: { en: 'Lab & Projects', zh: '实验室与项目' } },
     { src: '/atib-portfolio/images/about-4.jpg', alt: { en: 'Academic Life', zh: '学术生活' } },
-    { src: '/atib-portfolio/images/about-5.jpg', alt: { en: 'Automation Project', zh: '自动化项目' } },
+    
     { src: '/atib-portfolio/images/about-7.jpg', alt: { en: 'Research Team', zh: '研究团队' } },
+          { src: '/atib-portfolio/images/about-5.jpg', alt: { en: 'Automation Project', zh: '自动化项目' } },
   ],
 };
 

@@ -1,4 +1,5 @@
 import { MapPin, Mail, Linkedin, BookOpen, GraduationCap, Github, Globe } from 'lucide-react';
+import { Link } from 'react-router';
 import { footerConfig, personalInfo, institutions } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -9,10 +10,32 @@ function getIcon(iconName: string) {
   }
 }
 
+// Handle different link types properly
+function handleLinkClick(e: React.MouseEvent, href: string) {
+  // Phone links - let browser handle (dial)
+  if (href.startsWith('tel:')) {
+    return; // default behavior works
+  }
+  // Route links - let router handle
+  if (href.startsWith('/')) {
+    return; // Link component handles this
+  }
+  // Hash links (#section) - scroll to section
+  if (href.startsWith('#')) {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    return;
+  }
+}
+
 export function Footer() {
   const { language } = useLanguage();
-  const logo = footerConfig.logo[language]; const description = footerConfig.description[language];
-    const copyright = footerConfig.copyright[language];
+  const logo = footerConfig.logo[language];
+  const description = footerConfig.description[language];
+  const copyright = footerConfig.copyright[language];
 
   return (
     <footer className="w-full bg-[#070f1d] text-white py-16 lg:py-20 border-t border-blue-900/30">
@@ -42,7 +65,13 @@ export function Footer() {
             <h4 className="text-sm font-geist-mono uppercase tracking-widest text-blue-400/40 mb-4">{footerConfig.columns[0].title[language]}</h4>
             <ul className="space-y-3">
               {footerConfig.columns[0].links.map((link, i) => (
-                <li key={i}><a href={link.href} onClick={(e) => { e.preventDefault(); document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' }); }} className="text-blue-200/60 hover:text-blue-400 transition-colors">{link.label[language]}</a></li>
+                <li key={i}>
+                  {link.href.startsWith('/') ? (
+                    <Link to={link.href} className="text-blue-200/60 hover:text-blue-400 transition-colors">{link.label[language]}</Link>
+                  ) : (
+                    <a href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className="text-blue-200/60 hover:text-blue-400 transition-colors">{link.label[language]}</a>
+                  )}
+                </li>
               ))}
             </ul>
           </div>
@@ -50,7 +79,13 @@ export function Footer() {
             <h4 className="text-sm font-geist-mono uppercase tracking-widest text-blue-400/40 mb-4">{footerConfig.columns[1].title[language]}</h4>
             <ul className="space-y-3">
               {footerConfig.columns[1].links.map((link, i) => (
-                <li key={i}><a href={link.href} onClick={(e) => { e.preventDefault(); document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' }); }} className="text-blue-200/60 hover:text-blue-400 transition-colors">{link.label[language]}</a></li>
+                <li key={i}>
+                  {link.href.startsWith('/') ? (
+                    <Link to={link.href} className="text-blue-200/60 hover:text-blue-400 transition-colors">{link.label[language]}</Link>
+                  ) : (
+                    <a href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className="text-blue-200/60 hover:text-blue-400 transition-colors">{link.label[language]}</a>
+                  )}
+                </li>
               ))}
             </ul>
           </div>
@@ -69,7 +104,7 @@ export function Footer() {
           </div>
         </div>
         <div className="h-px bg-blue-900/30 my-12" />
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-blue-200/30">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-blue-200/30">
           <p>{copyright}</p>
         </div>
       </div>

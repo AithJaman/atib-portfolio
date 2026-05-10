@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { FileText, Award, BookOpen, Download, ChevronDown, ExternalLink } from 'lucide-react';
+import { FileText, Download, ChevronDown } from 'lucide-react';
 import { documentsConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
-
-const iconMap: Record<string, typeof FileText> = { FileText, Award, BookOpen };
 
 export function Documents() {
   const { language } = useLanguage();
@@ -30,28 +28,26 @@ export function Documents() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl">
           {c.items.map((doc, index) => {
-            const IconComponent = iconMap[doc.icon] || FileText;
             const isExpanded = expandedIndex === index;
-            const isExternal = doc.downloadUrl.startsWith('http');
+            const downloadUrl = `/atib-portfolio/documents/${doc.file}`;
             return (
               <div key={index} className={`transition-all duration-700 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${index * 80}ms` }}>
                 <div className="bg-white rounded-2xl border border-blue-100 hover:border-blue-200 transition-all duration-300 overflow-hidden">
                   <button onClick={() => setExpandedIndex(isExpanded ? null : index)} className="w-full text-left p-5 flex items-center gap-4 hover:bg-blue-50/30 transition-colors">
                     <div className="flex-shrink-0 w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center">
-                      <IconComponent className="w-5 h-5 text-blue-500" />
+                      <FileText className="w-5 h-5 text-blue-500" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-sm font-semibold text-exvia-black truncate">{doc.title[language]}</h3>
-                      <p className="text-xs text-exvia-black/40 mt-0.5">{doc.fileSize}</p>
+                      <p className="text-xs text-exvia-black/40 mt-0.5">{doc.size}</p>
                     </div>
                     <ChevronDown className={`w-4 h-4 text-exvia-black/30 flex-shrink-0 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
                   </button>
                   <div className={`overflow-hidden transition-all duration-400 ${isExpanded ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
                     <div className="px-5 pb-4 pt-0 border-t border-blue-50">
-                      <p className="text-xs text-exvia-black/60 leading-relaxed mt-3">{doc.description[language]}</p>
-                      <a href={doc.downloadUrl} target={isExternal ? '_blank' : undefined} rel="noopener noreferrer" download={!isExternal}
+                      <a href={downloadUrl} download
                         className="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-blue-500 text-white text-xs font-medium rounded-full hover:bg-blue-600 transition-colors shadow-blue-sm">
-                        {isExternal ? <><ExternalLink className="w-3 h-3" />{language === 'zh' ? '查看论文' : 'View Paper'}</> : <><Download className="w-3 h-3" />{language === 'zh' ? '下载文件' : 'Download'}</>}
+                        <Download className="w-3 h-3" />{language === 'zh' ? '下载文件' : 'Download'}
                       </a>
                     </div>
                   </div>

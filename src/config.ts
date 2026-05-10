@@ -100,7 +100,7 @@ export const skillsConfig = {
   description: { en: 'A multidisciplinary skill set spanning control theory, industrial automation, mechanical design, and artificial intelligence.', zh: '跨学科技能组合，涵盖控制理论、工业自动化、机械设计和人工智能。' },
   categories: [
     { title: { en: 'Control & Robotics', zh: '控制与机器人' }, icon: 'Cpu', skills: ['MATLAB/Simulink', 'SMC / Backstepping', 'PID / LQR / MPC', 'Robust Control', 'Nonlinear Dynamics', 'Monte Carlo Analysis'], image: '/atib-portfolio/images/service-1.jpg' },
-    { title: { en: 'PLC & Automation', zh: 'PLC与自动化' }, icon: 'Settings', skills: ['Siemens LOGO! / S7-200', 'Ladder / FBD / IL', 'SCADA / HMI', 'Industrial Wiring', 'Relay Logic', 'HVAC / Fire Safety'], image: '/atib-portfolio/images/service-2.jpg' },
+   { title: { en: 'PLC & Automation', zh: 'PLC与自动化' }, icon: 'Settings', skills: ['Siemens LOGO! / S7-200', 'Ladder', 'Industrial Wiring', 'Relay Logic'], image: '/atib-portfolio/images/service-2.jpg' },
     { title: { en: 'Design & Simulation', zh: '设计与仿真' }, icon: 'Box', skills: ['SolidWorks (CSWP Certified)', 'AutoCAD', 'FEA / CFD', '3D Modeling', 'FEA Structural Analysis'], image: '/atib-portfolio/images/service-3.jpg' },
     { title: { en: 'Creative & Promotional Skills', zh: '创意与推广技能' }, icon: 'Palette', skills: ['Adobe Photoshop', 'Adobe Premiere Pro', 'Canva', 'Promotional Photo Editing', 'Promotional Video Editing'], image: '/atib-portfolio/images/service-4.jpg' },
   ],

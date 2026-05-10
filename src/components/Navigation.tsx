@@ -7,7 +7,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useLocation } from 'react-router';
 
 export function Navigation() {
-  const { language, toggleLanguage } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -23,23 +23,9 @@ export function Navigation() {
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleNavClick = useCallback(
-    (e: React.MouseEvent, href: string) => {
-      e.preventDefault();
-      setIsMobileMenuOpen(false);
-      if (!isHomePage) {
-        window.location.href = '/atib-portfolio/#/' + href.replace('#', '');
-        return;
-      }
-      const targetId = href.replace('#', '');
-      const element = document.getElementById(targetId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    },
-    [isHomePage]
-  );
+  const toggleLanguage = useCallback(() => {
+  setLanguage(language === 'en' ? 'zh' : 'en');
+}, [language, setLanguage]);
 
   const scrollToSection = (id: string) => {
     setIsMobileMenuOpen(false);
@@ -53,13 +39,6 @@ export function Navigation() {
     }
   };
 
-  const handleContactClick = useCallback(
-    (e: React.MouseEvent) => {
-      e.preventDefault();
-      handleNavClick(e, navigationConfig.contactHref);
-    },
-    [handleNavClick]
-  );
 
   const navLinks = navigationConfig.links;
 

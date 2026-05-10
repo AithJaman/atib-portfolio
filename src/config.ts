@@ -17,7 +17,7 @@ export const personalInfo = {
     researchGate: 'https://www.researchgate.net/profile/Monjur-A-Alahi-Atib',
   googleScholar: 'https://scholar.google.com/citations?view_op=list_works&hl=en&user=mWzQf5UAAAAJ',
   linkedIn: 'https://www.linkedin.com/in/atib-zaman',
-  github: 'https://github.com/atibzaman',
+  github: 'https://github.com/AithJaman',
   cvPdfUrl: '/cv-atib.pdf',
 };
 

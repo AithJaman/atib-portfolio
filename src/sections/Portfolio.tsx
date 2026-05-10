@@ -610,15 +610,7 @@ export function Portfolio() {
             </span>
           </div>
 
-          <h2
-            className={cn(
-              'text-h2 font-semibold text-[#0a1628] dark:text-white mt-3 transition-all duration-700 ease-out-quart whitespace-pre-line',
-              headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            )}
-            style={{ transitionDelay: '100ms' }}
-          >
-            {heading}
-          </h2>
+          <h2 className={cn('text-h2 font-bold mt-3 transition-all duration-700 ease-out-quart whitespace-pre-line', headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6')} style={{ transitionDelay: '100ms' }}><span className="gradient-text">{heading}</span></h2>
 
           <p
             className={cn(

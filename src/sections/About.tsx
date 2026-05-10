@@ -10,6 +10,7 @@ export function About() {
   const description = aboutConfig.description[language];
   const experienceLabel = aboutConfig.experienceLabel[language];
   const label = aboutConfig.label[language];
+  const heading = aboutConfig.heading[language];
 
   return (
     <section id="about" className="w-full py-24 lg:py-32 relative">
@@ -23,6 +24,11 @@ export function About() {
         <div ref={sectionRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left Column - Text */}
           <div className="space-y-8">
+            {/* NEW: Heading */}
+            <div className={`transition-all duration-800 ease-out-quart ${sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '50ms' }}>
+              <h2 className="text-h2 font-bold gradient-text">{heading}</h2>
+            </div>
+
             <div className={`transition-all duration-800 ease-out-quart ${sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <span className="text-xs font-geist-mono uppercase tracking-widest text-blue-500 font-medium">{label}</span>
             </div>

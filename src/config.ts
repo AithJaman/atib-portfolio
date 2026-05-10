@@ -337,7 +337,6 @@ export const portfolioConfig = {
           { en: 'Improved understanding of real-time PLC-based traffic automation', zh: '提高对基于PLC的实时交通自动化的理解' },
         ],
         images: [
-          '/atib-portfolio/images/projects/plc-traffic/traffic-poster.jpg',
           '/atib-portfolio/images/projects/plc-traffic/traffic-ladder1.jpg',
           '/atib-portfolio/images/projects/plc-traffic/traffic-ladder2.jpg',
           '/atib-portfolio/images/projects/plc-traffic/traffic-ladder3.jpg',
@@ -379,7 +378,6 @@ export const portfolioConfig = {
           { en: 'Developed practical PLC control logic used in manufacturing and processing systems', zh: '开发制造和加工系统中使用的实用PLC控制逻辑' },
         ],
         images: [
-          '/atib-portfolio/images/projects/plc-mixing/mixing-poster.jpg',
           '/atib-portfolio/images/projects/plc-mixing/mixing-ladder1.jpg',
           '/atib-portfolio/images/projects/plc-mixing/mixing-ladder2.jpg',
           '/atib-portfolio/images/projects/plc-mixing/mixing-ladder3.jpg',
@@ -421,7 +419,6 @@ export const portfolioConfig = {
           { en: 'Built practical experience in industrial automation and PLC debugging', zh: '建立工业自动化和PLC调试的实践经验' },
         ],
         images: [
-          '/atib-portfolio/images/projects/plc-conveyor/conveyor-poster.jpg',
           '/atib-portfolio/images/projects/plc-conveyor/conveyor-report.jpg',
           '/atib-portfolio/images/projects/plc-conveyor/conveyor-exp.jpg',
           '/atib-portfolio/images/projects/plc-conveyor/conveyor-ladder1.jpg',
@@ -464,7 +461,6 @@ export const portfolioConfig = {
           { en: 'Improved understanding of industrial water management automation systems', zh: '提高对工业水管理自动化系统的理解' },
         ],
         images: [
-          '/atib-portfolio/images/projects/plc-water/water-poster.jpg',
           '/atib-portfolio/images/projects/plc-water/water-ladder1.jpg',
           '/atib-portfolio/images/projects/plc-water/water-ladder2.jpg',
           '/atib-portfolio/images/projects/plc-water/water-ladder3.jpg',
@@ -507,7 +503,6 @@ export const portfolioConfig = {
           { en: 'Developed complete vending machine automation workflow', zh: '开发完整的售货机自动化工作流程' },
         ],
         images: [
-          '/atib-portfolio/images/projects/plc-vending/vending-poster.jpg',
           '/atib-portfolio/images/projects/plc-vending/vending-ladder1.jpg',
           '/atib-portfolio/images/projects/plc-vending/vending-ladder2.jpg',
           '/atib-portfolio/images/projects/plc-vending/vending-design1.jpg',

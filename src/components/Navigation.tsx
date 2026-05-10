@@ -1,149 +1,150 @@
+import { useState, useEffect, useCallback } from 'react';
+import { Menu, X, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { navigationConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { Globe, Menu, X, Phone, Sun, Moon } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
 
 export function Navigation() {
-  const { language, setLanguage } = useLanguage();
+  const { language, toggleLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const logo = navigationConfig.logo[language];
-  const links = navigationConfig.links;
-  const contactLabel = navigationConfig.contactLabel[language];
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent, href: string) => {
+      e.preventDefault();
+      setIsMobileMenuOpen(false);
+      if (!isHomePage) {
+        window.location.href = '/atib-portfolio/#/' + href.replace('#', '');
+        return;
+      }
+      const targetId = href.replace('#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    },
+    [isHomePage]
+  );
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'zh' : 'en');
+  const scrollToSection = (id: string) => {
+    setIsMobileMenuOpen(false);
+    if (!isHomePage) {
+      window.location.href = '/atib-portfolio/#/' + id;
+      return;
+    }
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
+
+  const handleContactClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      handleNavClick(e, navigationConfig.contactHref);
+    },
+    [handleNavClick]
+  );
+
+  const navLinks = navigationConfig.links;
 
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-[#0a1628]/95 backdrop-blur-md shadow-lg'
-          : 'bg-white/90 backdrop-blur-md'
+          ? 'bg-white/80 dark:bg-[#0a1628]/80 backdrop-blur-md shadow-sm'
+          : 'bg-transparent'
       )}
     >
       <div className="container-large px-6 lg:px-12">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <a
-            href="#hero"
-            className={cn(
-              'text-xl font-bold tracking-tight transition-colors duration-300',
-              isScrolled ? 'text-white' : 'text-[#0a1628]'
-            )}
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="text-xl font-semibold text-[#0a1628] dark:text-white"
           >
-            {logo}
+            {navigationConfig.logo[language]}
           </a>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            {links.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className={cn(
-                  'text-sm font-medium transition-colors duration-300 hover:opacity-70',
-                  isScrolled ? 'text-white/80 hover:text-white' : 'text-[#0a1628]/70 hover:text-[#0a1628]'
-                )}
+            {navLinks.map((link) => (
+              <button
+                key={link.href}
+                onClick={(e) => scrollToSection(link.href.replace('#', ''))}
+                className="text-sm text-[#0a1628]/70 dark:text-white/70 hover:text-[#0a1628] dark:hover:text-white transition-colors bg-transparent border-none cursor-pointer"
               >
                 {link.label[language]}
-              </a>
+              </button>
             ))}
-
-            <a
-              href="tel:+8613264910246"
-              className={cn(
-                'flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300',
-                isScrolled
-                  ? 'bg-white text-[#0a1628] hover:bg-white/90'
-                  : 'bg-[#0a1628] text-white hover:bg-[#0a1628]/90'
-              )}
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="px-5 py-2 text-sm font-medium text-white bg-[#0a1628] dark:bg-white dark:text-[#0a1628] rounded-full hover:opacity-90 transition-opacity bg-transparent border-none cursor-pointer"
             >
-              <Phone className="w-3.5 h-3.5" />
-              {contactLabel}
+              {navigationConfig.contactLabel[language]}
+            </button>
+            
+            {/* Download CV Button */}
+            <a
+              href="/atib-portfolio/documents/Atib-CV.pdf"
+              download
+              className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-[#0a1628] dark:text-white border border-[#0a1628]/20 dark:border-white/20 rounded-full hover:bg-[#0a1628]/5 dark:hover:bg-white/10 transition-colors"
+            >
+              <Download className="w-3.5 h-3.5" />
+              {language === 'en' ? 'CV' : '简历'}
             </a>
 
-            {/* Language Toggle - Desktop */}
-            <button
-              onClick={toggleLanguage}
-              className={cn(
-                'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-300 border',
-                isScrolled
-                  ? 'border-white/30 text-white hover:bg-white/10'
-                  : 'border-[#0a1628]/20 text-[#0a1628] hover:bg-[#0a1628]/5'
-              )}
-            >
-              <Globe className="w-3.5 h-3.5" />
-              {language === 'en' ? '中文' : 'EN'}
-            </button>
-
-            {/* Theme Toggle - Desktop */}
-            <button
-              onClick={toggleTheme}
-              className={cn(
-                'w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300',
-                isScrolled
-                  ? 'bg-white/10 text-white hover:bg-white/20'
-                  : 'bg-[#0a1628]/10 text-[#0a1628] hover:bg-[#0a1628]/20'
-              )}
-              aria-label="Toggle dark mode"
-            >
-              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
+            <div className="flex items-center gap-2 pl-4 border-l border-[#0a1628]/10 dark:border-white/10">
+              <button
+                onClick={toggleLanguage}
+                className="flex items-center gap-1.5 text-xs text-[#0a1628]/60 dark:text-white/60 hover:text-[#0a1628] dark:hover:text-white transition-colors bg-transparent border-none cursor-pointer"
+              >
+                <span className="w-5 h-5 rounded-full border border-current flex items-center justify-center text-[10px]">
+                  {language === 'en' ? '中' : 'EN'}
+                </span>
+                {language === 'en' ? '中文' : 'EN'}
+              </button>
+              <button
+                onClick={toggleTheme}
+                className="w-8 h-8 flex items-center justify-center text-[#0a1628]/60 dark:text-white/60 hover:text-[#0a1628] dark:hover:text-white transition-colors bg-transparent border-none cursor-pointer"
+              >
+                {theme === 'dark' ? '☀️' : '🌙'}
+              </button>
+            </div>
           </div>
 
-          {/* Mobile Right Side: Theme + Language + Menu */}
-          <div className="flex lg:hidden items-center gap-2">
-            {/* Theme Toggle - Mobile */}
-            <button
-              onClick={toggleTheme}
-              className={cn(
-                'w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300',
-                isScrolled
-                  ? 'bg-white/10 text-white hover:bg-white/20'
-                  : 'bg-[#0a1628]/10 text-[#0a1628] hover:bg-[#0a1628]/20'
-              )}
-              aria-label="Toggle dark mode"
-            >
-              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
-
-            {/* Language Toggle - Mobile */}
+          {/* Mobile Menu Button */}
+          <div className="flex lg:hidden items-center gap-3">
             <button
               onClick={toggleLanguage}
-              className={cn(
-                'px-2.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300',
-                isScrolled
-                  ? 'bg-white/10 text-white hover:bg-white/20'
-                  : 'bg-[#0a1628]/10 text-[#0a1628] hover:bg-[#0a1628]/20'
-              )}
+              className="text-xs text-[#0a1628]/60 dark:text-white/60 bg-transparent border-none cursor-pointer"
             >
-              {language === 'en' ? '中文' : 'EN'}
+              <span className="w-6 h-6 rounded-full border border-current flex items-center justify-center text-[9px]">
+                {language === 'en' ? '中' : 'EN'}
+              </span>
             </button>
-
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={cn(
-                'lg:hidden w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300',
-                isScrolled
-                  ? 'bg-white/10 text-white'
-                  : 'bg-[#0a1628]/10 text-[#0a1628]'
-              )}
+              className="w-8 h-8 flex items-center justify-center text-[#0a1628] dark:text-white bg-transparent border-none cursor-pointer"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -151,34 +152,33 @@ export function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className={cn('lg:hidden absolute top-full left-0 right-0 border-t shadow-xl transition-colors duration-300', isScrolled ? 'bg-[#0a1628]/95 border-white/10' : 'bg-white/95 border-[#0a1628]/10')}>
-          <div className="container-large px-6 py-6 flex flex-col gap-4">
-            {links.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={cn(
-                  'text-base font-medium py-2 transition-colors',
-                  isScrolled ? 'text-white/80 hover:text-white' : 'text-[#0a1628]/70 hover:text-[#0a1628]'
-                )}
+        <div className="lg:hidden bg-white dark:bg-[#0a1628] border-t border-[#0a1628]/10 dark:border-white/10">
+          <div className="container-large px-6 py-4 space-y-1">
+            {navLinks.map((link) => (
+              <button
+                key={link.href}
+                onClick={(e) => scrollToSection(link.href.replace('#', ''))}
+                className="block w-full text-left py-3 text-base text-[#0a1628]/80 dark:text-white/80 hover:text-[#0a1628] dark:hover:text-white transition-colors bg-transparent border-none cursor-pointer"
               >
                 {link.label[language]}
-              </a>
+              </button>
             ))}
-            <a
-              href="tel:+8613264910246"
-              className={cn(
-                'flex items-center justify-center gap-2 px-4 py-3 rounded-full text-sm font-medium mt-2',
-                isScrolled
-                  ? 'bg-white text-[#0a1628]'
-                  : 'bg-[#0a1628] text-white'
-              )}
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="w-full mt-2 px-5 py-2.5 text-sm font-medium text-white bg-[#0a1628] dark:bg-white dark:text-[#0a1628] rounded-full bg-transparent border-none cursor-pointer"
             >
-              <Phone className="w-4 h-4" />
-              {contactLabel}
+              {navigationConfig.contactLabel[language]}
+            </button>
+            {/* Mobile CV Download */}
+            <a
+              href="/atib-portfolio/documents/Atib-CV.pdf"
+              download
+              className="flex items-center justify-center gap-1.5 w-full mt-2 px-5 py-2.5 text-sm font-medium text-[#0a1628] dark:text-white border border-[#0a1628]/20 dark:border-white/20 rounded-full"
+            >
+              <Download className="w-4 h-4" />
+              {language === 'en' ? 'Download CV' : '下载简历'}
             </a>
           </div>
         </div>

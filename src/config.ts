@@ -620,56 +620,11 @@ export const documentsConfig = {
   label: { en: 'Documents', zh: '文档资料' },
   heading: { en: 'Transcripts &\nCertificates', zh: '成绩单\n与证书' },
   description: { en: 'Official academic transcripts, certificates, and scholarship documents available for download.', zh: '官方学术成绩单、证书和奖学金文件可供下载。' },
-  items: [
-    {
-      title: { en: 'BSc Academic Transcript', zh: '学士学位成绩单' },
-      description: { en: 'Complete academic record from China Three Gorges University (CTGU), Bachelor of Engineering in Automation.', zh: '三峡大学（CTGU）完整学术记录，自动化工程学士。' },
-      fileSize: '1.5 MB',
-      downloadUrl: '/documents/bsc-transcript.pdf',
-      icon: 'FileText',
-    },
-    {
-      title: { en: 'MSc Academic Transcript', zh: '硕士学位成绩单' },
-      description: { en: 'Complete academic record from Beihang University (BUAA), Master of Control Engineering.', zh: '北京航空航天大学（BUAA）完整学术记录，控制工程硕士。' },
-      fileSize: '1.2 MB',
-      downloadUrl: '/documents/msc-transcript.pdf',
-      icon: 'FileText',
-    },
-    {
-      title: { en: 'CSWP Certificate', zh: 'CSWP认证' },
-      description: { en: 'Certified SolidWorks Professional certification in mechanical design and 3D modeling.', zh: '机械设计和3D建模的认证SolidWorks专业人员。' },
-      fileSize: '800 KB',
-      downloadUrl: '/documents/cswp-cert.pdf',
-      icon: 'Award',
-    },
-    {
-      title: { en: 'Six Sigma Green Belt', zh: '六西格玛绿带' },
-      description: { en: 'Process improvement and quality control certification.', zh: '流程改进和质量控制认证。' },
-      fileSize: '600 KB',
-      downloadUrl: '/documents/six-sigma.pdf',
-      icon: 'Award',
-    },
-    {
-      title: { en: 'CSC Scholarship Certificate', zh: 'CSC奖学金证书' },
-      description: { en: 'Chinese Government Scholarship certificate for Master studies at BUAA.', zh: '北京航空航天大学硕士中国政府奖学金证书。' },
-      fileSize: '900 KB',
-      downloadUrl: '/documents/csc-scholarship.pdf',
-      icon: 'Award',
-    },
-    {
-      title: { en: 'IFAC Paper 1 - Airship Control', zh: 'IFAC论文1 - 飞艇控制' },
-      description: { en: 'Dual-Gas H2/He Airship Design paper published in IFAC-PapersOnLine.', zh: '发表于IFAC-PapersOnLine的双气体H2/He飞艇设计论文。' },
-      fileSize: '2.3 MB',
-      downloadUrl: 'https://www.sciencedirect.com/science/article/pii/S2405896325008278',
-      icon: 'BookOpen',
-    },
-    {
-      title: { en: 'IFAC Paper 2 - Digital Twin', zh: 'IFAC论文2 - 数字孪生' },
-      description: { en: 'Digital-Twin-Driven Modeling for System Degradation paper published in IFAC-PapersOnLine.', zh: '发表于IFAC-PapersOnLine的数字孪生驱动系统退化建模论文。' },
-      fileSize: '2.1 MB',
-      downloadUrl: 'https://www.sciencedirect.com/science/article/pii/S2405896325008279',
-      icon: 'BookOpen',
-    },
+    documents: [
+    { title: { en: 'BSc Transcript', zh: '本科成绩单' }, file: 'bsc-transcript.pdf', size: '2.4 MB' },
+    { title: { en: 'MSc Transcript', zh: '硕士成绩单' }, file: 'msc-transcript.pdf', size: '1.8 MB' },
+    { title: { en: 'Bachelor Thesis', zh: '本科毕业论文' }, file: 'bachelor-thesis.pdf', size: '3.5 MB' },
+    { title: { en: 'PLC Experiments Full Report', zh: 'PLC实验完整报告' }, file: 'plc-experiments-report.pdf', size: '4.2 MB' },
   ],
 };
 

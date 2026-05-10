@@ -567,7 +567,7 @@ export const publicationsConfig = {
       journal: 'IFAC-PapersOnLine',
       details: 'vol. 59, no. 20, pp. 2567-2572',
       year: '2025',
-      link: 'https://www.sciencedirect.com/science/article/pii/S2405896325008278',
+      link: 'https://doi.org/10.1016/j.ifacol.2025.11.545',
       keywords: { en: 'Airship design, PID control, dual-gas buoyancy, altitude control', zh: '飞艇设计、PID控制、双气体浮力、高度控制' },
     },
     {
@@ -576,7 +576,7 @@ export const publicationsConfig = {
       journal: 'IFAC-PapersOnLine',
       details: 'vol. 59, pp. 2177-2182',
       year: '2025',
-      link: 'https://www.sciencedirect.com/science/article/pii/S2405896325008279',
+      link: 'https://doi.org/10.1016/j.ifacol.2025.11.482',
       keywords: { en: 'Digital twin, degradation modeling, RUL prediction, prognostics', zh: '数字孪生、退化建模、剩余使用寿命预测、故障预测' },
     },
   ],

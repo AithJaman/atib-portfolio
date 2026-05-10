@@ -69,9 +69,8 @@ export function Footer() {
           </div>
         </div>
         <div className="h-px bg-blue-900/30 my-12" />
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-blue-200/30">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-blue-200/30">
           <p>{copyright}</p>
-          <p>{credit}</p>
         </div>
       </div>
     </footer>

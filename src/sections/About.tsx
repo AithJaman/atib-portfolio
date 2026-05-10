@@ -44,7 +44,7 @@ export function About() {
           </div>
 
           {/* Right Column - Images */}
-          <div ref={imagesRef} className="grid grid-cols-2 gap-4">
+          <div ref={imagesRef} className="grid grid-cols-3 gap-4">
             {aboutConfig.images.map((image, index) => (
               <div key={index} className={`relative overflow-hidden rounded-2xl transition-all duration-700 ease-out-quart ${index % 2 === 1 ? 'mt-8' : ''} ${visibleItems[index] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                 <div className="aspect-[4/5] relative group cursor-pointer">

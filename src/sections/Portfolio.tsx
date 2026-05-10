@@ -1,73 +1,117 @@
 import { cn } from '@/lib/utils';
-import { useScrollAnimation, useStaggerAnimation } from '@/hooks/useScrollAnimation';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { ArrowUpRight, CheckCircle, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import { portfolioConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 
 // ==================== IMAGE LIGHTBOX ====================
 function ImageLightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
   const [scale, setScale] = useState(1);
-  const [panning, setPanning] = useState(false);
-  const [point, setPoint] = useState({ x: 0, y: 0 });
-  const imgRef = useRef<HTMLImageElement>(null);
+  const touchDistRef = useRef<number>(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
 
   const handleZoom = () => {
     setScale((prev) => (prev >= 2 ? 1 : prev + 0.5));
-    if (scale >= 2) setPoint({ x: 0, y: 0 });
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!panning || scale <= 1) return;
-    setPoint({ x: e.clientX, y: e.clientY });
+  const getTouchDist = (touches: React.TouchList) => {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      touchDistRef.current = getTouchDist(e.touches);
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      const newDist = getTouchDist(e.touches);
+      const diff = newDist - touchDistRef.current;
+      if (Math.abs(diff) > 10) {
+        setScale((prev) => {
+          const next = diff > 0 ? Math.min(prev + 0.1, 3) : Math.max(prev - 0.1, 1);
+          return next;
+        });
+        touchDistRef.current = newDist;
+      }
+    }
   };
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-md"
+      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-md touch-none"
       onClick={onClose}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
     >
       {/* Close Button */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
+        className="fixed top-3 right-3 z-10 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors sm:absolute"
       >
         <X className="w-5 h-5 text-white" />
       </button>
 
-      {/* Zoom Button */}
-      <button
-        onClick={(e) => { e.stopPropagation(); handleZoom(); }}
-        className="absolute top-4 left-4 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
-      >
-        <ZoomIn className="w-5 h-5 text-white" />
-      </button>
+      {/* Zoom Button - Desktop only */}
+      {!isMobile && (
+        <button
+          onClick={(e) => { e.stopPropagation(); handleZoom(); }}
+          className="absolute top-3 left-3 z-10 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors"
+        >
+          <ZoomIn className="w-5 h-5 text-white" />
+        </button>
+      )}
 
       {/* Image */}
       <div
         className="w-full h-full flex items-center justify-center overflow-hidden"
-        onMouseDown={() => setPanning(true)}
-        onMouseUp={() => setPanning(false)}
-        onMouseLeave={() => setPanning(false)}
-        onMouseMove={handleMouseMove}
         onClick={(e) => e.stopPropagation()}
       >
         <img
-          ref={imgRef}
           src={src}
           alt={alt}
-          className="max-w-[95%] max-h-[90vh] object-contain transition-transform duration-300 cursor-grab active:cursor-grabbing"
-          style={{
-            transform: `scale(${scale}) translate(${(point.x - window.innerWidth / 2) / 20}px, ${(point.y - window.innerHeight / 2) / 20}px)`,
-          }}
+          className="max-w-[95%] max-h-[85dvh] sm:max-h-[90vh] object-contain transition-transform duration-300 select-none"
+          style={{ transform: `scale(${scale})` }}
           draggable={false}
         />
       </div>
 
       {/* Zoom Hint */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 text-xs">
-        Click to zoom ({Math.round(scale * 100)}%) | Click outside to close
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 text-xs text-center">
+        {isMobile ? 'Pinch to zoom | Tap outside to close' : `Click to zoom (${Math.round(scale * 100)}%) | Click outside to close`}
       </div>
+
+      {/* Scale indicator */}
+      {scale > 1 && (
+        <div className="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/50 rounded-full text-white text-xs">
+          {Math.round(scale * 100)}%
+        </div>
+      )}
     </div>
   );
 }
@@ -77,7 +121,20 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
   const { language } = useLanguage();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [videoErrors, setVideoErrors] = useState<Set<number>>(new Set());
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
 
   if (!project?.detail) return null;
 
@@ -85,9 +142,9 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
   const allImages = detail.images || [];
   const allVideos = detail.videos || [];
 
-  // Sort: overall first
+  // Sort: poster first, then others
   const sortedImages = [...allImages].sort((a: string) =>
-    a.includes('overall') ? -1 : 0
+    a.includes('poster') || a.includes('overall') ? -1 : 0
   );
 
   const nextImage = useCallback(() => {
@@ -98,46 +155,54 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
     setCurrentImageIndex((prev) => (prev - 1 + sortedImages.length) % sortedImages.length);
   }, [sortedImages.length]);
 
+  const handleVideoError = (index: number) => {
+    setVideoErrors((prev) => new Set(prev).add(index));
+  };
+
   return (
     <>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-4" onClick={onClose}>
-        <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm"
+        onClick={onClose}
+      />
 
+      {/* Modal Container */}
+      <div className="fixed inset-0 z-[101] flex items-start justify-center sm:items-center sm:p-4">
         <div
           className="relative w-full max-w-6xl max-h-[100dvh] sm:max-h-[95vh] overflow-y-auto bg-white dark:bg-[#0d1f38] sm:rounded-2xl shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Close Button */}
+          {/* FIXED CLOSE BUTTON */}
           <button
             onClick={onClose}
-            className="sticky top-3 right-3 z-10 float-right w-9 h-9 bg-white/90 dark:bg-[#0d1f38]/90 backdrop-blur rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 dark:hover:bg-[#1a2f4d] transition-colors m-3 border border-gray-200 dark:border-white/10"
+            className="fixed top-3 right-3 z-[102] w-10 h-10 bg-white/95 dark:bg-[#1a2f4d]/95 backdrop-blur rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 dark:hover:bg-[#243a5a] transition-colors border border-gray-200 dark:border-white/20 sm:absolute sm:top-4 sm:right-4"
           >
-            <X className="w-4 h-4 text-[#0a1628] dark:text-white" />
+            <X className="w-5 h-5 text-[#0a1628] dark:text-white" />
           </button>
 
           {/* POSTER - Full Display */}
           <div
-            className="relative w-full cursor-zoom-in"
+            className="relative w-full cursor-zoom-in bg-[#0a1628]"
             onClick={() => setLightboxImage(project.image)}
           >
             <img
               src={project.image}
               alt={project.title?.[language]}
-              className="w-full h-auto object-contain"
+              className="w-full h-auto max-h-[50vh] sm:max-h-[70vh] object-contain mx-auto"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
             <div className="absolute bottom-3 left-4 sm:bottom-5 sm:left-6">
               <span className="text-[10px] sm:text-xs font-geist-mono uppercase tracking-widest text-white/70">
                 {project.category?.[language]}
               </span>
-              <h2 className="text-lg sm:text-2xl font-bold text-white mt-0.5">
+              <h2 className="text-lg sm:text-2xl font-bold text-white mt-0.5 pr-20">
                 {project.title?.[language]}
               </h2>
             </div>
-            <span className="absolute top-3 right-3 px-3 py-1 text-xs font-geist-mono bg-black/40 backdrop-blur rounded-full text-white">
+            <span className="absolute top-3 right-14 sm:right-16 px-3 py-1 text-xs font-geist-mono bg-black/40 backdrop-blur rounded-full text-white">
               {project.year}
             </span>
-            {/* Zoom Icon */}
             <div className="absolute top-3 left-3 w-8 h-8 bg-black/40 rounded-full flex items-center justify-center">
               <ZoomIn className="w-4 h-4 text-white" />
             </div>
@@ -149,7 +214,7 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
               {detail.shortDescription?.[language]}
             </p>
 
-            {/* Videos - Auto Play */}
+            {/* Videos - Only if exists (Airship project) */}
             {allVideos.length > 0 && (
               <div className="mb-6">
                 <h3 className="text-base font-semibold text-[#0a1628] dark:text-white mb-3">
@@ -157,24 +222,28 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {allVideos.map((video: string, i: number) => (
-                    <div key={i} className="relative rounded-xl overflow-hidden bg-[#0a1628] shadow-lg">
-                      <video
-                        ref={(el) => { videoRefs.current[i] = el; }}
-                        src={video}
-                        loop
-                        muted
-                        playsInline
-                        autoPlay
-                        preload="metadata"
-                        className="w-full aspect-video object-cover"
-                        onLoadedMetadata={(e) => {
-                          (e.target as HTMLVideoElement).play().catch(() => {});
-                        }}
-                      />
-                      <div className="absolute bottom-2 left-2 px-2 py-0.5 bg-black/50 rounded text-[10px] text-white">
-                        {i === 0 ? 'Animation' : 'Flow Simulation'}
+                    !videoErrors.has(i) ? (
+                      <div key={i} className="relative rounded-xl overflow-hidden bg-[#0a1628] shadow-lg">
+                        <video
+                          src={video}
+                          loop
+                          muted
+                          playsInline
+                          autoPlay
+                          preload="metadata"
+                          controls
+                          className="w-full aspect-video object-cover"
+                          onError={() => handleVideoError(i)}
+                        />
+                        <div className="absolute bottom-2 left-2 px-2 py-0.5 bg-black/50 rounded text-[10px] text-white">
+                          {i === 0 ? 'Animation' : 'Flow Simulation'}
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div key={i} className="relative rounded-xl overflow-hidden bg-[#0a1628] shadow-lg flex items-center justify-center aspect-video">
+                        <p className="text-gray-400 text-xs">Video unavailable</p>
+                      </div>
+                    )
                   ))}
                 </div>
               </div>
@@ -264,7 +333,7 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
               </div>
             </div>
 
-            {/* Figures Carousel with Click-to-Zoom */}
+            {/* Figures Carousel */}
             {sortedImages.length > 0 && (
               <div className="mb-6">
                 <h3 className="text-base font-semibold text-[#0a1628] dark:text-white mb-3">
@@ -278,7 +347,7 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
                   <img
                     src={sortedImages[currentImageIndex]}
                     alt={`Figure ${currentImageIndex + 1} of ${sortedImages.length}`}
-                    className="w-full max-h-[300px] sm:max-h-[450px] object-contain"
+                    className="w-full max-h-[250px] sm:max-h-[450px] object-contain"
                   />
 
                   {sortedImages.length > 1 && (
@@ -426,15 +495,97 @@ function ProjectCard({
   );
 }
 
+// ==================== PANEL 1: FEATURED PROJECTS (1x3) ====================
+function FeaturedPanel({ projects, onSelect }: { projects: any[]; onSelect: (p: any) => void }) {
+  const { language } = useLanguage();
+  const { ref: panelRef, isVisible: panelVisible } = useScrollAnimation({ threshold: 0.1 });
+
+  return (
+    <div ref={panelRef} className="mb-16">
+      {/* Panel Header */}
+      <div className="mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-[2px] bg-[#2563eb]" />
+          <span className="text-xs font-geist-mono uppercase tracking-widest text-[#2563eb] dark:text-blue-400">
+            {language === 'en' ? 'Featured Projects' : '精选项目'}
+          </span>
+        </div>
+      </div>
+
+      {/* 1x3 Grid */}
+      <div className="grid md:grid-cols-3 gap-4 sm:gap-5">
+        {projects.map((project, index) => (
+          <div
+            key={index}
+            className={cn(
+              'transition-all duration-700 ease-out-quart',
+              panelVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            )}
+            style={{ transitionDelay: `${index * 150}ms` }}
+          >
+            <ProjectCard
+              project={project}
+              index={index}
+              isVisible={panelVisible}
+              onClick={() => onSelect(project)}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ==================== PANEL 2: PLC PROJECTS (2x3) ====================
+function PLCPanel({ projects, onSelect }: { projects: any[]; onSelect: (p: any) => void }) {
+  const { language } = useLanguage();
+  const { ref: panelRef, isVisible: panelVisible } = useScrollAnimation({ threshold: 0.1 });
+
+  return (
+    <div ref={panelRef}>
+      {/* Panel Header */}
+      <div className="mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-[2px] bg-[#2563eb]" />
+          <span className="text-xs font-geist-mono uppercase tracking-widest text-[#2563eb] dark:text-blue-400">
+            {language === 'en' ? 'PLC Projects' : 'PLC项目'}
+          </span>
+        </div>
+      </div>
+
+      {/* 2x3 Grid */}
+      <div className="grid md:grid-cols-3 gap-4 sm:gap-5">
+        {projects.map((project, index) => (
+          <div
+            key={index}
+            className={cn(
+              'transition-all duration-700 ease-out-quart',
+              panelVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            )}
+            style={{ transitionDelay: `${index * 100}ms` }}
+          >
+            <ProjectCard
+              project={project}
+              index={index}
+              isVisible={panelVisible}
+              onClick={() => onSelect(project)}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ==================== MAIN PORTFOLIO ====================
 export function Portfolio() {
   const { language } = useLanguage();
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation({ threshold: 0.3 });
-  const { containerRef: gridRef, visibleItems } = useStaggerAnimation(
-    portfolioConfig.projects.length,
-    100
-  );
+
+  // Split projects into 2 panels
+  const featuredProjects = portfolioConfig.projects.slice(0, 3);
+  const plcProjects = portfolioConfig.projects.slice(3);
 
   const label = portfolioConfig.label[language];
   const heading = portfolioConfig.heading[language];
@@ -477,27 +628,18 @@ export function Portfolio() {
           </p>
         </div>
 
-        {/* Projects Grid - 3x3 Layout */}
-        <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
-          {portfolioConfig.projects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              project={project}
-              index={index}
-              isVisible={visibleItems[index]}
-              onClick={() => setSelectedProject(project)}
-            />
-          ))}
-        </div>
+        {/* PANEL 1: 3 Featured Projects */}
+        <FeaturedPanel projects={featuredProjects} onSelect={setSelectedProject} />
+
+        {/* PANEL 2: 6 PLC Projects */}
+        <PLCPanel projects={plcProjects} onSelect={setSelectedProject} />
 
         {/* CTA Row */}
         <div className="mt-8">
           <div
             className={cn(
               'relative overflow-hidden bg-[#0a1628] dark:bg-[#0d1f38] rounded-xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between transition-all duration-700 ease-out-quart gap-4',
-              visibleItems[portfolioConfig.projects.length]
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-6'
+              headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             )}
           >
             <div>

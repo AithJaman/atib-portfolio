@@ -697,7 +697,7 @@ export const footerConfig = {
       title: { en: 'Resources', zh: '资源' },
       links: [
         { label: { en: 'Education', zh: '教育' }, href: '#education' },
-        { label: { en: 'Contact', zh: '联系' }, href: '#contact' },
+        { label: { en: 'Contact', zh: '联系' }, href: 'tel:+8613264910246' },
         { label: { en: 'Download CV', zh: '下载简历' }, href: '/cv' },
       ],
     },

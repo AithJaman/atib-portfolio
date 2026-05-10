@@ -21,6 +21,21 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router';
 
+// Force colored printing instead of greyscale
+const printStyles = `
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    body {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+  }
+`;
+
 export default function CV() {
   const { language } = useLanguage();
   const isZh = language === 'zh';
@@ -93,14 +108,14 @@ export default function CV() {
       title:
         'Dual-Gas H\u2082/He Airship Design: Optimized Buoyancy and PID-Based Altitude Control',
       journal: 'IFAC-PapersOnLine, vol. 59, no. 20, pp. 2567-2572, 2025',
-      link: 'https://www.sciencedirect.com/science/article/pii/S2405896325008278',
+      link: 'https://www.sciencedirect.com/science/article/pii/S2405896325008278 ',
     },
     {
       authors: 'H. Ambreen, M. Imran, M. A. A. Atib, D. Tang',
       title:
         'A Digital-Twin-Driven Modeling Approach for System Degradation and Remaining Useful Life Prediction',
       journal: 'IFAC-PapersOnLine, vol. 59, pp. 2177-2182, 2025',
-      link: 'https://www.sciencedirect.com/science/article/pii/S2405896325008279',
+      link: 'https://www.sciencedirect.com/science/article/pii/S2405896325008279 ',
     },
   ];
 
@@ -236,6 +251,9 @@ export default function CV() {
 
   return (
     <div className="min-h-screen bg-gray-100 print:bg-white">
+      {/* Force colored print styles */}
+      <style>{printStyles}</style>
+
       {/* Floating Action Bar */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-200 print:hidden">
         <div className="max-w-[900px] mx-auto px-6 h-14 flex items-center justify-between">
@@ -254,14 +272,13 @@ export default function CV() {
               <Printer className="w-4 h-4" />
               {t.print}
             </button>
-            <a
-              href="/cv-atib.pdf"
-              download="MD_Monjur_A_Alaahi_Atib_CV.pdf"
+            <button
+              onClick={() => window.print()}
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
             >
               <Download className="w-4 h-4" />
               {t.download}
-            </a>
+            </button>
           </div>
         </div>
       </div>

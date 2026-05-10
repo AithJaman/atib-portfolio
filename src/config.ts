@@ -88,7 +88,6 @@ export const aboutConfig = {
     { src: '/atib-portfolio/images/about-3.png', alt: { en: 'Lab & Projects', zh: '实验室与项目' } },
     { src: '/atib-portfolio/images/about-4.jpg', alt: { en: 'Academic Life', zh: '学术生活' } },
     { src: '/atib-portfolio/images/about-5.jpg', alt: { en: 'Automation Project', zh: '自动化项目' } },
-    { src: '/atib-portfolio/images/about-6.png', alt: { en: 'Engineering Competition', zh: '工程竞赛' } },
     { src: '/atib-portfolio/images/about-7.jpg', alt: { en: 'Research Team', zh: '研究团队' } },
   ],
 };

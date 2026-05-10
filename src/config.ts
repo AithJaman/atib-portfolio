@@ -82,32 +82,14 @@ export const aboutConfig = {
     { value: '5', label: { en: 'Core\nSkill Areas', zh: '核心\n技能领域' } },
     { value: '5', label: { en: 'Languages\nFluent', zh: '流利\n语言' } },
   ],
-    images: [
+        images: [
     { src: '/atib-portfolio/images/about-1.jpg', alt: { en: 'Professional Photo', zh: '职业照片' } },
-    { src: '/atib-portfolio/images/about-2.png?v=2', alt: { en: 'Research Work', zh: '研究工作' } },
-    { src: '/atib-portfolio/images/about-3.png?v=2', alt: { en: 'Lab & Projects', zh: '实验室与项目' } },
+    { src: '/atib-portfolio/images/about-2.png', alt: { en: 'Research Work', zh: '研究工作' } },
+    { src: '/atib-portfolio/images/about-3.png', alt: { en: 'Lab & Projects', zh: '实验室与项目' } },
     { src: '/atib-portfolio/images/about-4.jpg', alt: { en: 'Academic Life', zh: '学术生活' } },
-          {
-      src: '/atib-portfolio/images/about/about-5.jpg',
-      alt: {
-        en: 'Atib working on automation project',
-        zh: 'Atib working on automation project',
-      },
-    },
-    {
-      src: '/atib-portfolio/images/about/about-6.png',
-      alt: {
-        en: 'Atib at engineering competition',
-        zh: 'Atib at engineering competition',
-      },
-    },
-    {
-      src: '/atib-portfolio/images/about/about-7.jpg',
-      alt: {
-        en: 'Atib with research team',
-        zh: 'Atib with research team',
-      },
-    },
+    { src: '/atib-portfolio/images/about-5.jpg', alt: { en: 'Automation Project', zh: '自动化项目' } },
+    { src: '/atib-portfolio/images/about-6.png', alt: { en: 'Engineering Competition', zh: '工程竞赛' } },
+    { src: '/atib-portfolio/images/about-7.jpg', alt: { en: 'Research Team', zh: '研究团队' } },
   ],
 };
 

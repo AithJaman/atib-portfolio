@@ -108,14 +108,14 @@ export default function CV() {
       title:
         'Dual-Gas H\u2082/He Airship Design: Optimized Buoyancy and PID-Based Altitude Control',
       journal: 'IFAC-PapersOnLine, vol. 59, no. 20, pp. 2567-2572, 2025',
-      link: 'https://www.sciencedirect.com/science/article/pii/S2405896325008278 ',
+      link: 'https://doi.org/10.1016/j.ifacol.2025.11.545',
     },
     {
       authors: 'H. Ambreen, M. Imran, M. A. A. Atib, D. Tang',
       title:
         'A Digital-Twin-Driven Modeling Approach for System Degradation and Remaining Useful Life Prediction',
       journal: 'IFAC-PapersOnLine, vol. 59, pp. 2177-2182, 2025',
-      link: 'https://www.sciencedirect.com/science/article/pii/S2405896325008279 ',
+      link: 'https://doi.org/10.1016/j.ifacol.2025.11.482',
     },
   ];
 

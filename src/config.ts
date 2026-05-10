@@ -31,7 +31,7 @@ export const socialLinks = [
     { icon: 'Linkedin', href: 'https://www.linkedin.com/in/atib-zaman', label: 'LinkedIn' },
   { icon: 'BookOpen', href: 'https://www.researchgate.net/profile/Monjur-A-Alahi-Atib', label: 'ResearchGate' },
   { icon: 'GraduationCap', href: 'https://scholar.google.com/citations?user=mWzQf5UAAAAJ&hl=en', label: 'Google Scholar' },
-  { icon: 'Github', href: 'https://github.com/atibzaman', label: 'GitHub' },
+  { icon: 'Github', href: 'https://github.com/AithJaman', label: 'GitHub' },
   { icon: 'Mail', href: 'mailto:aitbzaman@gmail.com', label: 'Email' },
 ];
 
@@ -187,7 +187,7 @@ export const portfolioConfig = {
       result: { en: 'Masters Thesis - IFAC 2025', zh: '硕士论文 - IFAC 2025' },
       outcome: { en: 'Achieved 86% reduction in peak tracking error. Novel control architecture with Monte Carlo validation under 2000+ wind scenarios.', zh: '峰值跟踪误差降低86%。新型控制架构在2000+次风况下蒙特卡洛验证。' },
       featured: true,
-      link: 'https://www.sciencedirect.com/science/article/pii/S2405896325008278',
+            link: 'https://doi.org/10.1016/j.ifacol.2025.11.545',
       detail: {
         shortDescription: { en: 'Designed and validated a robust nonlinear control framework for a spherical semi-indoor airship for filming and monitoring applications. The system combines vector-thrust propulsion, buoyancy-assisted flight, and Sliding Mode-Based Backstepping Control to achieve stable trajectory tracking under disturbances.', zh: '设计并验证用于半室内飞艇 filming 和监控应用的鲁棒非线性控制框架，结合矢量推力推进、浮力辅助飞行和滑模反步控制，实现扰动下的稳定轨迹跟踪。' },
         myRole: { en: 'Researcher / Control System Designer', zh: '研究员 / 控制系统设计师' },
@@ -567,7 +567,7 @@ export const publicationsConfig = {
       journal: 'IFAC-PapersOnLine',
       details: 'vol. 59, no. 20, pp. 2567-2572',
       year: '2025',
-      link: 'https://doi.org/10.1016/j.ifacol.2025.11.545',
+            link: 'https://doi.org/10.1016/j.ifacol.2025.11.545',
       keywords: { en: 'Airship design, PID control, dual-gas buoyancy, altitude control', zh: '飞艇设计、PID控制、双气体浮力、高度控制' },
     },
     {
@@ -576,7 +576,7 @@ export const publicationsConfig = {
       journal: 'IFAC-PapersOnLine',
       details: 'vol. 59, pp. 2177-2182',
       year: '2025',
-      link: 'https://doi.org/10.1016/j.ifacol.2025.11.482',
+            link: 'https://doi.org/10.1016/j.ifacol.2025.11.482',
       keywords: { en: 'Digital twin, degradation modeling, RUL prediction, prognostics', zh: '数字孪生、退化建模、剩余使用寿命预测、故障预测' },
     },
   ],
@@ -698,7 +698,6 @@ export const footerConfig = {
       links: [
         { label: { en: 'Education', zh: '教育' }, href: '#education' },
         { label: { en: 'Contact', zh: '联系' }, href: '#contact' },
-        { label: { en: 'Call Now', zh: '立即致电' }, href: 'tel:+8613264910246' },
         { label: { en: 'Download CV', zh: '下载简历' }, href: '/cv' },
       ],
     },
@@ -707,7 +706,7 @@ export const footerConfig = {
     { iconName: 'Linkedin', href: 'https://www.linkedin.com/in/atib-zaman', label: 'LinkedIn' },
     { iconName: 'BookOpen', href: 'https://www.researchgate.net/profile/Monjur-A-Alahi-Atib', label: 'ResearchGate' },
     { iconName: 'GraduationCap', href: 'https://scholar.google.com/citations?view_op=list_works&hl=en&user=mWzQf5UAAAAJ', label: 'Google Scholar' },
-    { iconName: 'Github', href: 'https://github.com/atibzaman', label: 'GitHub' },
+    { iconName: 'Github', href: 'https://github.com/AithJaman', label: 'GitHub' },
     { iconName: 'Mail', href: 'mailto:aitbzaman@gmail.com', label: 'Email' },
   ],
   copyright: { en: '\u00A9 2026 MD Monjur A Alahi Atib. All rights reserved.', zh: '\u00A9 2026 MD Monjur A Alahi Atib. All rights reserved.' },

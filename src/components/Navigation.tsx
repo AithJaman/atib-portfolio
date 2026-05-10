@@ -30,7 +30,6 @@ export function Navigation() {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   }, [theme, setTheme]);
 
-  // FIX 1: Better scroll with navbar offset
   const scrollToSection = (href: string) => {
     setIsMobileMenuOpen(false);
     const targetId = href.replace('#', '');
@@ -80,16 +79,16 @@ export function Navigation() {
               </a>
             ))}
 
-            {/* FIX 2: Contact Button - calls phone number directly */}
+            {/* Contact Button - white text + white border */}
             <a
               href="tel:+8613264910246"
-              className="flex items-center gap-1.5 px-5 py-2 text-sm font-medium text-[#0a1628] bg-white rounded-full hover:opacity-90 transition-opacity"
+              className="flex items-center gap-1.5 px-5 py-2 text-sm font-medium text-white bg-transparent border border-white rounded-full hover:bg-white/10 transition-opacity"
             >
               <Phone className="w-3.5 h-3.5" />
               {navigationConfig.contactLabel[language]}
             </a>
 
-            {/* FIX 3: CV Button - goes to CV page (same as hero) */}
+            {/* CV Button - links to /cv page */}
             <Link
               to="/cv"
               className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-white border border-white/30 rounded-full hover:bg-white/10 transition-all duration-300"
@@ -155,12 +154,12 @@ export function Navigation() {
             {/* Mobile Contact - phone */}
             <a
               href="tel:+8613264910246"
-              className="flex items-center justify-center gap-1.5 w-full mt-2 px-5 py-2.5 text-sm font-medium text-[#0a1628] bg-white rounded-full"
+              className="flex items-center justify-center gap-1.5 w-full mt-2 px-5 py-2.5 text-sm font-medium text-white border border-white rounded-full hover:bg-white/10"
             >
               <Phone className="w-4 h-4" />
               {navigationConfig.contactLabel[language]}
             </a>
-            {/* Mobile CV - goes to CV page */}
+            {/* Mobile CV - links to /cv page */}
             <Link
               to="/cv"
               className="flex items-center justify-center gap-1.5 w-full mt-2 px-5 py-2.5 text-sm font-medium text-white border border-white/20 rounded-full"

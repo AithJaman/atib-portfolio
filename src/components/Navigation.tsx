@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Menu, X, Download } from 'lucide-react';
+import { Menu, X, Download, Phone } from 'lucide-react';
+import { Link } from 'react-router';
 import { cn } from '@/lib/utils';
 import { navigationConfig } from '@/config';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -29,13 +30,19 @@ export function Navigation() {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   }, [theme, setTheme]);
 
+  // FIX 1: Better scroll with navbar offset
   const scrollToSection = (href: string) => {
     setIsMobileMenuOpen(false);
     const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (!targetId) return;
+    setTimeout(() => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        const navHeight = 80;
+        const top = element.getBoundingClientRect().top + window.scrollY - navHeight;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }, 10);
   };
 
   const navLinks = navigationConfig.links;
@@ -54,7 +61,7 @@ export function Navigation() {
           {/* Logo */}
           <a
             href="#"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="text-xl font-semibold text-white"
           >
             {navigationConfig.logo[language]}
@@ -66,30 +73,30 @@ export function Navigation() {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={() => scrollToSection(link.href)}
+                onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
                 className="text-sm font-medium text-white/70 hover:text-white transition-colors duration-300"
               >
                 {link.label[language]}
               </a>
             ))}
 
-            {/* Contact Button */}
-            <button
-              onClick={() => scrollToSection('#contact')}
-              className="px-5 py-2 text-sm font-medium text-[#0a1628] bg-white rounded-full hover:opacity-90 transition-opacity"
-            >
-              {navigationConfig.contactLabel[language]}
-            </button>
-
-            {/* CV Download Button */}
+            {/* FIX 2: Contact Button - calls phone number directly */}
             <a
-              href="/atib-portfolio/documents/Atib-CV.pdf"
-              download
+              href="tel:+8613264910246"
+              className="flex items-center gap-1.5 px-5 py-2 text-sm font-medium text-[#0a1628] bg-white rounded-full hover:opacity-90 transition-opacity"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              {navigationConfig.contactLabel[language]}
+            </a>
+
+            {/* FIX 3: CV Button - goes to CV page (same as hero) */}
+            <Link
+              to="/cv"
               className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-white border border-white/30 rounded-full hover:bg-white/10 transition-all duration-300"
             >
               <Download className="w-3.5 h-3.5" />
               {language === 'en' ? 'CV' : '简历'}
-            </a>
+            </Link>
 
             {/* Language Toggle */}
             <div className="flex items-center gap-2 pl-4 border-l border-white/10">
@@ -102,7 +109,6 @@ export function Navigation() {
                 </span>
                 {language === 'en' ? '中文' : 'EN'}
               </button>
-              {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
                 className="w-8 h-8 flex items-center justify-center text-white/60 hover:text-white transition-colors bg-transparent border-none cursor-pointer"
@@ -140,27 +146,28 @@ export function Navigation() {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={() => scrollToSection(link.href)}
+                onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
                 className="block text-base font-medium py-3 text-white/80 hover:text-white transition-colors"
               >
                 {link.label[language]}
               </a>
             ))}
-            <button
-              onClick={() => scrollToSection('#contact')}
-              className="w-full mt-2 px-5 py-2.5 text-sm font-medium text-[#0a1628] bg-white rounded-full"
-            >
-              {navigationConfig.contactLabel[language]}
-            </button>
-            {/* Mobile CV Download */}
+            {/* Mobile Contact - phone */}
             <a
-              href="/atib-portfolio/documents/Atib-CV.pdf"
-              download
+              href="tel:+8613264910246"
+              className="flex items-center justify-center gap-1.5 w-full mt-2 px-5 py-2.5 text-sm font-medium text-[#0a1628] bg-white rounded-full"
+            >
+              <Phone className="w-4 h-4" />
+              {navigationConfig.contactLabel[language]}
+            </a>
+            {/* Mobile CV - goes to CV page */}
+            <Link
+              to="/cv"
               className="flex items-center justify-center gap-1.5 w-full mt-2 px-5 py-2.5 text-sm font-medium text-white border border-white/20 rounded-full"
             >
               <Download className="w-4 h-4" />
               {language === 'en' ? 'Download CV' : '下载简历'}
-            </a>
+            </Link>
           </div>
         </div>
       )}

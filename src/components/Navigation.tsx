@@ -117,8 +117,16 @@ export function Navigation() {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
+                    {/* Mobile Menu Button */}
           <div className="flex lg:hidden items-center gap-3">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="w-8 h-8 flex items-center justify-center text-white/60 hover:text-white transition-colors bg-transparent border-none cursor-pointer"
+            >
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
+            {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
               className="text-xs text-white/60 bg-transparent border-none cursor-pointer"
@@ -127,6 +135,7 @@ export function Navigation() {
                 {language === 'en' ? '中' : 'EN'}
               </span>
             </button>
+            {/* Hamburger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="w-8 h-8 flex items-center justify-center text-white bg-transparent border-none cursor-pointer"
@@ -168,6 +177,13 @@ export function Navigation() {
               {language === 'en' ? 'Download CV' : '下载简历'}
             </Link>
           </div>
+                      {/* Mobile Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center justify-center gap-2 w-full mt-2 px-5 py-2.5 text-sm font-medium text-white/80 border border-white/20 rounded-full hover:bg-white/10"
+            >
+              {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
+            </button>
         </div>
       )}
     </nav>

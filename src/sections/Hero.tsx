@@ -75,7 +75,7 @@ export function Hero() {
               className="w-11 h-11 rounded-full bg-[#0a1628] flex items-center justify-center hover:bg-blue-600 transition-all">
               <GraduationCap className="w-5 h-5 text-white" />
             </a>
-            <a href="https://github.com/atibzaman" target="_blank" rel="noopener noreferrer"
+            <a href="https://github.com/AithJaman" target="_blank" rel="noopener noreferrer"
               className="w-11 h-11 rounded-full bg-[#0a1628] flex items-center justify-center hover:bg-blue-600 transition-all">
               <Github className="w-5 h-5 text-white" />
             </a>
@@ -85,8 +85,8 @@ export function Hero() {
             </a>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap items-center gap-4">
+                    {/* CTA Buttons */}
+          <div className="flex flex-col items-start gap-3 w-full max-w-xs">
             <a href="tel:+8613264910246"
               className="inline-flex items-center gap-2 px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-full text-sm text-white font-medium transition-all">
               <Phone className="w-4 h-4" />

@@ -204,22 +204,22 @@ export default function CV() {
     },
   ];
 
-  const skillGroups = [
+    const skillGroups = [
     {
       cat: isZh ? '控制与机器人' : 'Control & Robotics',
       items: ['MATLAB/Simulink', 'SMC / Backstepping', 'PID / LQR / MPC', 'Robust Control', 'Nonlinear Dynamics', 'Monte Carlo Analysis'],
     },
     {
       cat: isZh ? 'PLC与自动化' : 'PLC & Automation',
-      items: ['Siemens LOGO! / S7-200', 'Ladder / FBD / IL', 'SCADA / HMI', 'Industrial Wiring', 'Relay Logic', 'HVAC / Fire Safety'],
+      items: ['Siemens LOGO! / S7-200', 'Ladder', 'Industrial Wiring', 'Relay Logic'],
     },
     {
       cat: isZh ? '设计与仿真' : 'Design & Simulation',
       items: ['SolidWorks (CSWP)', 'AutoCAD', 'FEA / CFD', '3D Modeling', 'Proteus', 'PSIM'],
     },
     {
-      cat: isZh ? 'AI与编程' : 'AI & Programming',
-      items: ['Python / FastAPI', 'PyTorch / ResNet', 'DeepSeek API', 'Git / GitHub', 'LaTeX', 'FPGA'],
+      cat: isZh ? '创意与推广技能' : 'Creative & Promotional Skills',
+      items: ['Adobe Photoshop', 'Adobe Premiere Pro', 'Canva', 'Promotional Photo Editing', 'Promotional Video Editing'],
     },
   ];
 

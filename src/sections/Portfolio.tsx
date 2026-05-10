@@ -142,10 +142,13 @@ function ProjectModal({ project, onClose }: { project: any; onClose: () => void 
   const allImages = detail.images || [];
   const allVideos = detail.videos || [];
 
-  // Sort: poster first, then others
-  const sortedImages = [...allImages].sort((a: string) =>
-    a.includes('poster') || a.includes('overall') ? -1 : 0
-  );
+    const sortedImages = [...allImages].sort((a: string, b: string) => {
+    const aIsPoster = a.includes('poster') || a.includes('overall');
+    const bIsPoster = b.includes('poster') || b.includes('overall');
+    if (aIsPoster && !bIsPoster) return -1;
+    if (!aIsPoster && bIsPoster) return 1;
+    return 0;
+  });
 
   const nextImage = useCallback(() => {
     setCurrentImageIndex((prev) => (prev + 1) % sortedImages.length);
@@ -634,32 +637,6 @@ export function Portfolio() {
         {/* PANEL 2: 6 PLC Projects */}
         <PLCPanel projects={plcProjects} onSelect={setSelectedProject} />
 
-        {/* CTA Row */}
-        <div className="mt-8">
-          <div
-            className={cn(
-              'relative overflow-hidden bg-[#0a1628] dark:bg-[#0d1f38] rounded-xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between transition-all duration-700 ease-out-quart gap-4',
-              headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            )}
-          >
-            <div>
-              <span className="text-xs font-geist-mono uppercase tracking-widest text-white/50">
-                {portfolioConfig.cta.label[language]}
-              </span>
-              <h3 className="text-xl font-semibold text-white mt-2">
-                {portfolioConfig.cta.heading[language]}
-              </h3>
-            </div>
-            <a
-              href={portfolioConfig.cta.linkHref}
-              className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#0a1628] rounded-full text-sm font-medium hover:bg-white/90 transition-colors shrink-0"
-            >
-              {portfolioConfig.cta.linkText[language]}
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-            <div className="absolute -bottom-10 -right-10 w-36 h-36 rounded-full bg-white/5" />
-          </div>
-        </div>
       </div>
 
       {/* Project Detail Modal */}

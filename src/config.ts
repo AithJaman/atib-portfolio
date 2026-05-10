@@ -620,7 +620,7 @@ export const documentsConfig = {
   label: { en: 'Documents', zh: '文档资料' },
   heading: { en: 'Transcripts &\nCertificates', zh: '成绩单\n与证书' },
   description: { en: 'Official academic transcripts, certificates, and scholarship documents available for download.', zh: '官方学术成绩单、证书和奖学金文件可供下载。' },
-    documents: [
+    items: [
     { title: { en: 'BSc Transcript', zh: '本科成绩单' }, file: 'bsc-transcript.pdf', size: '2.4 MB' },
     { title: { en: 'MSc Transcript', zh: '硕士成绩单' }, file: 'msc-transcript.pdf', size: '1.8 MB' },
     { title: { en: 'Bachelor Thesis', zh: '本科毕业论文' }, file: 'bachelor-thesis.pdf', size: '3.5 MB' },

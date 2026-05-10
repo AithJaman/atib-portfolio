@@ -693,12 +693,13 @@ export const footerConfig = {
         { label: { en: 'Publications', zh: '论文' }, href: '#publications' },
       ],
     },
-    {
+        {
       title: { en: 'Resources', zh: '资源' },
       links: [
         { label: { en: 'Education', zh: '教育' }, href: '#education' },
         { label: { en: 'Contact', zh: '联系' }, href: '#contact' },
-        { label: { en: 'Download CV', zh: '下载简历' }, href: '/cv-atib.pdf' },
+        { label: { en: 'Call Now', zh: '立即致电' }, href: 'tel:+8613264910246' },
+        { label: { en: 'Download CV', zh: '下载简历' }, href: '/cv' },
       ],
     },
   ],
@@ -710,5 +711,5 @@ export const footerConfig = {
     { iconName: 'Mail', href: 'mailto:aitbzaman@gmail.com', label: 'Email' },
   ],
   copyright: { en: '\u00A9 2026 MD Monjur A Alahi Atib. All rights reserved.', zh: '\u00A9 2026 MD Monjur A Alahi Atib. All rights reserved.' },
-  credit: { en: 'Built with React, TypeScript & Tailwind CSS', zh: 'Built with React, TypeScript & Tailwind CSS' },
+    credit: { en: '', zh: '' },
 };

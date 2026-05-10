@@ -67,7 +67,7 @@ export function Achievements() {
           <div className={cn('transition-all duration-800 ease-out-quart', headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4')}>
             <span className="text-xs font-geist-mono uppercase tracking-widest text-white/50">{label}</span>
           </div>
-          <h2 className={cn('text-h2 font-bold text-white mt-4 transition-all duration-800 ease-out-quart whitespace-pre-line', headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6')} style={{ transitionDelay: '100ms' }}>{heading}</h2>
+          <h2 className={cn('text-h2 font-bold mt-4 transition-all duration-800 ease-out-quart whitespace-pre-line', headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6')} style={{ transitionDelay: '100ms' }}><span className="text-blue-400">{heading}</span></h2>
           <p className={cn('mt-6 text-lg text-white/60 leading-relaxed transition-all duration-800 ease-out-quart', headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6')} style={{ transitionDelay: '200ms' }}>{description}</p>
         </div>
 

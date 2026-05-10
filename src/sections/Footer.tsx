@@ -12,7 +12,7 @@ function getIcon(iconName: string) {
 export function Footer() {
   const { language } = useLanguage();
   const logo = footerConfig.logo[language]; const description = footerConfig.description[language];
-  const copyright = footerConfig.copyright[language]; const credit = footerConfig.credit[language];
+    const copyright = footerConfig.copyright[language];
 
   return (
     <footer className="w-full bg-[#070f1d] text-white py-16 lg:py-20 border-t border-blue-900/30">
